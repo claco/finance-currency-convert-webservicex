@@ -10,4 +10,5 @@ t/basic.t
 t/convert.t
 t/pod_coverage.t
 t/pod_syntax.t
+t/strict.t
 Todo
