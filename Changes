@@ -1,6 +1,10 @@
 $Id$
 Revision history for Perl module Finance::Currency::Convert::WebserviceX
 
+0.03 Thur Mar 10 20:19:27 2005
+    - Fixed bug where converting from XXX to XXX yielded a price of 0
+        since the rate returned was also 0
+
 0.02 Web Mar 09 22:45:13 2005
     - Added missing convert example to pod
 
