@@ -5,7 +5,7 @@ use warnings;
 use vars qw($VERSION);
 use LWP::UserAgent;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 sub new {
     my $class = shift;
@@ -87,6 +87,21 @@ You know the routine. C<new> is your friend.
 =head1 METHODS
 
 =head2 convert($value, $from, $to)
+
+Converts a number value from one currency to another and returns the result.
+
+    my $result = $cc->convert(1.95, 'USD', 'JPY');
+
+If an error occurs, no value is given, or the from/to aren't 3 letter currency codes,
+C<convert> returns C<undef>.
+
+For now, you can access the request response after calling C>convert>:
+
+    my $response = $self->{'response'};
+
+This returns a L<HTTP::Response> object that can be used to inspect any remote web
+service errors. $self->response{'request'} is reset at the beginning of every call
+to C<convert> and returns C<undef> otherwise.
 
 =over
 
