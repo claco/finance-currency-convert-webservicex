@@ -1,0 +1,4 @@
+$Id$
+TODO list for Perl module Finance::Currency::Convert::WebserviceX
+
+    - Mimic various ::Convert APIs to facilitate drop-in replacement

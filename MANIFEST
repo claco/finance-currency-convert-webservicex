@@ -1,0 +1,13 @@
+Changes
+lib/Finance/Currency/Convert/WebserviceX.pm
+LICENSE
+Makefile.PL
+MANIFEST
+MANIFEST.SKIP
+META.yml
+README
+t/basic.t
+t/convert.t
+t/pod_coverage.t
+t/pod_syntax.t
+Todo
