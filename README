@@ -1,93 +1,48 @@
 NAME
-    AxKit::XSP::Currency - Currency formatting and conversion taglib
-
-VERSION
-        $Id: Currency.pm 302 2005-03-05 02:51:23Z claco $
+    Finance::Currency::Convert::WebserviceX - Lightweight currency
+    conversion using WebserviceX.NET
 
 SYNOPSIS
-    Add this taglib to AxKit in your http.conf or .htaccess:
-
-        AxAddXSPTaglib AxKit::XSP::Currency
-
-    Add the namespace to your XSP file and use the tags:
-
-        <xsp:page
-             language="Perl"
-             xmlns:xsp="http://apache.org/xsp/core/v1"
-             xmlns:currency="http://today.icantfocus.com/CPAN/AxKit/XSP/Currency"
-        >
-
-        <currency:format code="USD" options="FMT_STANDARD">19.5</currency:format>
-
-        <currency:format>
-            <currency:code>USD</currency:code>
-            <currenct:options>FMT_HTML</currency:options>
-            <currency:price>10.95</currenct:price>
-        </currency:format>
+        use Finance::Currency::Convert::WebserviceX;
+        my $cc = Finance::Currency::Convert::WebserviceX->new;
+        my $result = $cc->convert(1.95, 'USD', 'JPY');
 
 DESCRIPTION
-    This tag library provides an interface to format and convert currency
-    within XSP pages.
+    This is a lightweight module to do currency conversion using the Curency
+    Convertor web service at http://www.webservicex.net/.
 
-    This initial version currently only supports currency formatting.
-    Currency conversion is planned for future releases.
+    The motivation for this module was many fold. First,
+    Finance::Currency::Convert with Finance::Quote was a little too bulky
+    for my needs, esp the need to download or maintain conversion tables.
+    Finance::Currency::Convert::Yahoo seemed to be based on screen scraping.
+    Way to fragile for my taste. Finance::Currency::Convert::XE has usage
+    restrictions from XE.com. [No offense intended to any of the authors
+    above]
 
-TAG HIERARCHY
-        <currency:format code="USD|CAD|..." options="FMT_STANDARD|FMT_COMMON|...">
-            <currency:code></currency:code>
-            <currency:options></currency:options>
-            <currency:price></currency:price>
-        </currency:format>
+CONSTRUCTOR
+    You know the routine. "new" is your friend.
 
-TAG REFERENCE
-  <currency:format>
-    Given a price, usually in decimal form, format returns a formatted price
-    using the various options in "Locale::Currency::Format".
+        use Finance::Currency::Convert::WebserviceX;
+        my $cc = Finance::Currency::Convert::WebserviceX->new;
 
-        <currency:format>
-            <currency:price>10.9</currency:price>
-        </currency:format>  # prints &amp;#x0024;10.50
+METHODS
+  convert($value, $from, $to)
+    value
+        The number or price to be converted.
 
-   Attributes
-    The "format" tag has three available attributes to control the output:
+    from
+        The three letter ISO currency code for the currency amount specified
+        in "value". See Locale::Currency for the available currency codes.
 
-    code
-        This is the 3 letter currency code used to specify the currency in
-        use. The "code" attribute can also be specified using a child tag
-        instead:
-
-            <currency:format>
-                <currency:code>USD</currency:code>
-            </currency:format>
-
-        "USD" is used as the default if no currency code is specified. See
-        Locale::Currency::Format for all of the available currency codes.
-
-    options
-        This is a string containing the formatting options to be used to
-        specify the desired output format. The "options" attribute can also
-        be specified using a child tag instead:
-
-            <currency:format>
-                <currency:options>FMT_STANDARD | FMT_NOZEROS</currency:options>
-            </currency:format>
-
-        "FMT_HTML" is used as the default if no options are specified. See
-        Locale::Currency::Format for all of the available format options.
-
-    price
-        This is the price to be formatted. While it can be passed as an
-        attribute, the more common usage will be as a child tag:
-
-            <currency:format>
-                <currency:price>19.95</currency:price>
-            </currency:format>
+    to  The three letter ISO currency code for the currency you want the
+        "value" to be converted to. See Locale::Currency for the available
+        currency codes.
 
 SEE ALSO
-    Locale::Currency::Format
+    Locale::Currency, Finance::Currency::Format
 
 AUTHOR
         Christopher H. Laco
         CPAN ID: CLACO
-        cpan@chrislaco.com
+        claco@chrislaco.com
         http://today.icantfocus.com/blog/
