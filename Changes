@@ -1,6 +1,9 @@
 $Id$
 Revision history for Perl module Finance::Currency::Convert::WebserviceX
 
+0.05 Mon Mar 21 18:56:24 2005
+    - Added Test::Strict warnings_ok tests
+
 0.04 Mon Mar 14 19:00:23 2005
     - Added Test::Strict tests
 

@@ -14,5 +14,9 @@ WriteMakefile(
         'HTTP::Response' => undef
     },
     (ExtUtils::MakeMaker->VERSION >= 6.11) ?
-    (NO_META      => 1) : ()
+    (NO_META      => 1) : (),
+
+    dist => {
+        PREOP => 'pod2text lib/Finance/Currency/Convert/WebserviceX.pm > $(DISTVNAME)/README',
+    }
 );

@@ -1,4 +1,4 @@
-# $Id: MANIFEST.SKIP 346 2005-03-05 22:08:22Z claco $
+# $Id$
 \bRCS\b
 \bCVS\b
 ,v$
@@ -11,3 +11,4 @@ Makefile$
 \.db
 t/TEST$
 t/SMOKE$
+cover_db

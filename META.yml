@@ -2,7 +2,7 @@
 name: Finance-Currency-Convert-WebserviceX
 abstract: Lightweight currency conversion using WebserviceX.NET
 author: Christopher H. Laco <claco@chrislaco.com>
-version: 0.04
+version: 0.05
 version_from: lib\Finance\Currency\Convert\WebserviceX.pm
 installdirs: site
 license: perl
@@ -13,6 +13,6 @@ recommends:
   Pod::Coverage: 0.14
   Test::Pod: 1.00
   Test::Pod::Coverage: 1.04
-  Test:Strict: 0
+  Test:Strict: 0.05
 distribution_type: module
 generated_by: ExtUtils::MakeMaker version 6.17

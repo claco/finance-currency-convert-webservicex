@@ -5,7 +5,7 @@ use warnings;
 use vars qw($VERSION);
 use LWP::UserAgent;
 
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 sub new {
     my $class = shift;
