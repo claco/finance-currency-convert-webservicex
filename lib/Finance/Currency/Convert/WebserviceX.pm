@@ -5,7 +5,7 @@ use warnings;
 use vars qw($VERSION);
 use LWP::UserAgent;
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 sub new {
     my $class = shift;
@@ -44,7 +44,7 @@ sub convert {
         return undef;
     } else {
         if ($self->{'response'}->content =~ /<double.*>(.*)<\/double>/i) {
-            return $value*$1;
+            return $value*($1 || 1);
         } else {
             return undef;
         };
