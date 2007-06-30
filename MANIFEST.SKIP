@@ -1,14 +1,39 @@
 # $Id$
+# Avoid version control files.
 \bRCS\b
 \bCVS\b
 ,v$
+,B$
+,D$
 \B\.svn\b
-^blib/
-^pm_to_blib
-^MakeMaker-\d
-Makefile.old
-Makefile$
-\.db
-t/TEST$
-t/SMOKE$
-cover_db
+aegis.log$
+\bconfig$
+\bbuild$
+
+# Avoid Makemaker generated and utility files.
+\bMakefile$
+\bblib
+\bMakeMaker-\d
+\bpm_to_blib$
+\bblibdirs$
+
+# Avoid Module::Build generated and utility files.
+\bBuild$
+\b_build
+Build.PL
+Build.bat
+
+# Avoid temp and backup files.
+~$
+\.gz$
+\.old$
+\.bak$
+\.swp$
+\.tdy$
+\.tmp$
+\#$
+\b\.#
+
+# Avoid author test files.
+\bpod-spelling.t$
+

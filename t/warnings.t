@@ -11,8 +11,8 @@ BEGIN {
 
     plan skip_all => 'set TEST_AUTHOR to enable this test' unless $ENV{TEST_AUTHOR};
 
-    eval 'use Test::Strict';
-    plan skip_all => 'Test::Strict not installed' if $@;
+    eval 'use Test::Strict 0.05';
+    plan skip_all => 'Test::Strict 0.05 not installed' if $@;
     plan skip_all => 'Need untaint in newer File::Find' if $] <= 5.006;
 };
 
@@ -49,6 +49,6 @@ if (scalar @files) {
 };
 
 foreach (@files) {
-    strict_ok($_);
+   warnings_ok($_);
 };
 
