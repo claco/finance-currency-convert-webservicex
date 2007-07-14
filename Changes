@@ -1,6 +1,9 @@
 $Id$
 Revision history for Perl module Finance::Currency::Convert::WebserviceX
 
+0.06001 Fri July 13 21:53:47 2007
+    - Fixed MANIFEST.SKIP for missing README
+
 0.06000 Sat June 30 17:54:56 2007
     - Converted to Module::Install
     - Added more culted tests

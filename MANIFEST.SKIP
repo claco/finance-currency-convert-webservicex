@@ -1,4 +1,3 @@
-# $Id$
 # Avoid version control files.
 \bRCS\b
 \bCVS\b
@@ -36,4 +35,3 @@ Build.bat
 
 # Avoid author test files.
 \bpod-spelling.t$
-
