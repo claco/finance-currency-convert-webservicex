@@ -1,6 +1,10 @@
 $Id$
 Revision history for Perl module Finance::Currency::Convert::WebserviceX
 
+0.06002 Sun Jan 20 12:51:43 2007
+    - Updated broken META.yml
+    - Added convert mock tests. Live converts use TEST_AUTHOR
+
 0.06001 Fri July 13 21:53:47 2007
     - Fixed MANIFEST.SKIP for missing README
 

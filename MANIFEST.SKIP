@@ -8,6 +8,7 @@
 aegis.log$
 \bconfig$
 \bbuild$
+\.DS_Store$
 
 # Avoid Makemaker generated and utility files.
 \bMakefile$
@@ -32,6 +33,5 @@ Build.bat
 \.tmp$
 \#$
 \b\.#
-
-# Avoid author test files.
-\bpod-spelling.t$
+\.kpf
+\.tmproj

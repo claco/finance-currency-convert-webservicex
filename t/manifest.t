@@ -8,6 +8,7 @@ BEGIN {
     use Test::More;
 
     plan skip_all => 'set TEST_AUTHOR to enable this test' unless $ENV{TEST_AUTHOR};
+    plan skip_all => 'run make manifest to generate MANIFEST' unless -e 'MANIFEST';
 
     eval 'use Test::CheckManifest 0.09';
     if($@) {

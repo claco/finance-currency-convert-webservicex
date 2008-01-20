@@ -3,9 +3,9 @@ package Finance::Currency::Convert::WebserviceX;
 use strict;
 use warnings;
 use vars qw($VERSION);
-use LWP::UserAgent;
+use LWP::UserAgent ();
 
-$VERSION = '0.06001';
+$VERSION = '0.06002';
 
 sub new {
     my $class = shift;
@@ -43,7 +43,7 @@ sub convert {
     if (!$self->{'response'}->is_success) {
         return undef;
     } else {
-        if ($self->{'response'}->content =~ /<double.*>(.*)<\/double>/i) {
+        if (($self->{'response'}->content || '') =~ /<double.*>(.*)<\/double>/i) {
             return $value*($1 || 1);
         } else {
             return undef;

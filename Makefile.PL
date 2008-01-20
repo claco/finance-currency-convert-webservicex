@@ -14,10 +14,9 @@ requires 'HTTP::Response';
 tests 't/*.t t/*/*.t';
 clean_files 'Finance-Currency-Convert-WebserviceX-* t/var';
 
-auto_install;
+eval {
+    system 'pod2text lib/Finance/Currency/Convert/WebserviceX.pm > README';
+};
 
-WriteMakefile(
-  dist => {
-    PREOP => 'pod2text lib/Finance/Currency/Convert/WebserviceX.pm > $(DISTVNAME)/README'
-  }
-);
+auto_install;
+WriteAll;

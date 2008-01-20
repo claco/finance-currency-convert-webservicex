@@ -5,26 +5,8 @@ use warnings;
 use Test::More;
 
 BEGIN {
-    eval 'use Test::MockObject 1.07';
-    if (!$@) {
-        plan tests => 14;
-
-        my @responses = ('<double>1.23</double>', '<double>1.23</double>', '<double>1.00</double>', undef);
-        Test::MockObject->fake_module('HTTP::Response' => (
-            is_success => sub {1;},
-            content => sub {return shift @responses}
-        ));
-        Test::MockObject->fake_module('LWP::UserAgent' => (
-            new => sub {return bless {}, shift},
-            timeout => sub {},
-            env_proxy => sub {},
-            get => sub {
-                bless {}, 'HTTP::Response'
-            }
-        ));
-    } else {
-        plan skip_all => 'Test::MockObject 1.07 not installed';
-    };
+    plan skip_all => 'set TEST_AUTHOR to enable this test' unless $ENV{TEST_AUTHOR};
+    plan tests => 12;
 
     use_ok('Finance::Currency::Convert::WebserviceX');
 };
@@ -65,12 +47,4 @@ BEGIN {
     isa_ok($cc, 'Finance::Currency::Convert::WebserviceX');
 
     is($cc->convert(2.34, 'USD', 'USD'), 2.34);
-};
-
-## no response returns undef
-{
-    my $cc = Finance::Currency::Convert::WebserviceX->new;
-    isa_ok($cc, 'Finance::Currency::Convert::WebserviceX');
-
-    is($cc->convert(2.34, 'USD', 'CAD'), undef);
 };
