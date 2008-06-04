@@ -1,6 +1,10 @@
 $Id$
 Revision history for Perl module Finance::Currency::Convert::WebserviceX
 
+0.07000 Tue June 3 19:36:46 2008
+    - Added caching of webservice results; default of 300 seconds per from/to
+        pair of currency codes
+
 0.06002 Sun Jan 20 12:51:43 2007
     - Updated broken META.yml
     - Added convert mock tests. Live converts use TEST_AUTHOR

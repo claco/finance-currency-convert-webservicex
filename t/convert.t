@@ -9,7 +9,7 @@ BEGIN {
     if (!$@) {
         plan tests => 14;
 
-        my @responses = ('<double>1.23</double>', '<double>1.23</double>', '<double>1.00</double>', undef);
+        my @responses = ('<double>1.23</double>', '<double>1.23</double>', undef);
         Test::MockObject->fake_module('HTTP::Response' => (
             is_success => sub {1;},
             content => sub {return shift @responses}

@@ -6,7 +6,7 @@ use Test::More;
 
 BEGIN {
     plan skip_all => 'set TEST_AUTHOR to enable this test' unless $ENV{TEST_AUTHOR};
-    plan tests => 12;
+    plan tests => 14;
 
     use_ok('Finance::Currency::Convert::WebserviceX');
 };
@@ -28,7 +28,9 @@ BEGIN {
     my $cc = Finance::Currency::Convert::WebserviceX->new;
     isa_ok($cc, 'Finance::Currency::Convert::WebserviceX');
 
+    ok(!exists $cc->cache->{'USD-JPY'});
     isnt($cc->convert(2.00, 'USD', 'JPY'), undef);
+    ok(exists $cc->cache->{'USD-JPY'});
 };
 
 ## make sure we uc the from/to

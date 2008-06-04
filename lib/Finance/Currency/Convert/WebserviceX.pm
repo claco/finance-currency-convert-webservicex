@@ -4,8 +4,11 @@ use strict;
 use warnings;
 use vars qw($VERSION);
 use LWP::UserAgent ();
+use Memoize::Expire ();
 
-$VERSION = '0.06002';
+$VERSION = '0.07000';
+
+my $expires = tie my %cache => 'Memoize::Expire', LIFETIME => 300;
 
 sub new {
     my $class = shift;
@@ -20,16 +23,29 @@ sub new {
     return $self;
 };
 
+sub cache {
+    return \%cache;
+}
+
 sub convert {
     my $self = shift;
     my $value = shift || '';
     my $from = shift || '';
     my $to = shift || '';
+    my $key = "$from-$to";
 
     $from = uc($from);
     $to   = uc($to);
 
     return unless length $value && $from =~ /^[A-Z]{3}$/ && $to =~ /^[A-Z]{3}$/;
+
+    if ($from eq $to) {
+        return $value;
+    }
+
+    if (exists $cache{$key}) {
+        return $cache{$key};
+    }
 
     my $uri = sprintf('http://www.webservicex.net/CurrencyConvertor.asmx/ConversionRate?FromCurrency=%s&ToCurrency=%s', $from, $to);
 
@@ -41,12 +57,14 @@ sub convert {
     return if $@;
 
     if (!$self->{'response'}->is_success) {
-        return undef;
+        return;
     } else {
         if (($self->{'response'}->content || '') =~ /<double.*>(.*)<\/double>/i) {
-            return $value*($1 || 1);
+            my $rate = $value*($1 || 1);
+            $cache{$key} = $rate;
+            return $rate;
         } else {
-            return undef;
+            return;
         };
     };
 };
@@ -123,9 +141,13 @@ currency codes.
 
 =back
 
+=head2 cache
+
+Gets the reference to the cache hash.
+
 =head1 SEE ALSO
 
-L<Locale::Currency>, L<Finance::Currency::Format>
+L<Locale::Currency>, L<Finance::Currency::Format>, L<Memoize::Expire>
 
 =head1 AUTHOR
 

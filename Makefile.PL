@@ -10,8 +10,9 @@ all_from 'lib/Finance/Currency/Convert/WebserviceX.pm';
 
 requires 'LWP';
 requires 'HTTP::Response';
+requires 'Memoize';
 
-tests 't/*.t t/*/*.t';
+tests 't/*.t';
 clean_files 'Finance-Currency-Convert-WebserviceX-* t/var';
 
 eval {
