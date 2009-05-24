@@ -1,5 +1,7 @@
-$Id$
 Revision history for Perl module Finance::Currency::Convert::WebserviceX
+
+0.07001 Sun May 2410:32:43 2009
+    - Fixed problem with result cache: #RT46216 - (DELTA) Christian Lackas
 
 0.07000 Tue June 3 19:36:46 2008
     - Added caching of webservice results; default of 300 seconds per from/to

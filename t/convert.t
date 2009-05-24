@@ -7,7 +7,7 @@ use Test::More;
 BEGIN {
     eval 'use Test::MockObject 1.07';
     if (!$@) {
-        plan tests => 14;
+        plan tests => 18;
 
         my @responses = ('<double>1.23</double>', '<double>1.23</double>', undef);
         Test::MockObject->fake_module('HTTP::Response' => (
@@ -67,10 +67,21 @@ BEGIN {
     is($cc->convert(2.34, 'USD', 'USD'), 2.34);
 };
 
-## no response returns undef
+## check cache does not return the same value for different values
 {
     my $cc = Finance::Currency::Convert::WebserviceX->new;
     isa_ok($cc, 'Finance::Currency::Convert::WebserviceX');
 
-    is($cc->convert(2.34, 'USD', 'CAD'), undef);
+    isnt($cc->convert(1.00, 'USD', 'JPY'), $cc->convert(2.00, 'USD', 'JPY'));
+}
+
+## check the cache is properly setup, also for non uc-values
+{
+    my $cc = Finance::Currency::Convert::WebserviceX->new;
+    isa_ok($cc, 'Finance::Currency::Convert::WebserviceX');
+
+    ok(!exists $cc->cache->{'USD-EUR'});
+    isnt($cc->convert(1.00, 'usd', 'eur'), undef);
+    ok(exists $cc->cache->{'USD-EUR'});
 };
+

@@ -6,7 +6,7 @@ use vars qw($VERSION);
 use LWP::UserAgent ();
 use Memoize::Expire ();
 
-$VERSION = '0.07000';
+$VERSION = '0.07001';
 
 my $expires = tie my %cache => 'Memoize::Expire', LIFETIME => 300;
 
@@ -32,10 +32,11 @@ sub convert {
     my $value = shift || '';
     my $from = shift || '';
     my $to = shift || '';
-    my $key = "$from-$to";
 
     $from = uc($from);
     $to   = uc($to);
+
+    my $key = "$from-$to";
 
     return unless length $value && $from =~ /^[A-Z]{3}$/ && $to =~ /^[A-Z]{3}$/;
 
@@ -44,7 +45,7 @@ sub convert {
     }
 
     if (exists $cache{$key}) {
-        return $cache{$key};
+        return $cache{$key}*$value;
     }
 
     my $uri = sprintf('http://www.webservicex.net/CurrencyConvertor.asmx/ConversionRate?FromCurrency=%s&ToCurrency=%s', $from, $to);
@@ -60,9 +61,9 @@ sub convert {
         return;
     } else {
         if (($self->{'response'}->content || '') =~ /<double.*>(.*)<\/double>/i) {
-            my $rate = $value*($1 || 1);
+            my $rate = ($1 || 1);
             $cache{$key} = $rate;
-            return $rate;
+            return $rate*$value;
         } else {
             return;
         };
